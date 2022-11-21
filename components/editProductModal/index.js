@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from "react";
 import {
   Button,
   Input,
@@ -13,11 +13,11 @@ import {
   Textarea,
   useDisclosure,
   useToast,
-} from '@chakra-ui/react';
-import Image from 'next/image';
-import axiosInstance from '../../src/config/api';
-import { api_origin } from '../../constraint';
-import { useRouter } from 'next/router';
+} from "@chakra-ui/react";
+import Image from "next/image";
+import axiosInstance from "../../src/config/api";
+import {api_origin} from "../../constraint";
+import {useRouter} from "next/router";
 
 function EditProductModal({
   currentProduct,
@@ -42,11 +42,11 @@ function EditProductModal({
     servingType: currentProduct.servingType,
   });
   const [newProductImage, setNewProductImage] = useState(
-    currentProduct.productImage,
+    currentProduct.productImage
   );
   const router = useRouter();
   const toast = useToast();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
 
   useEffect(() => {
     if (editProductButton) {
@@ -79,12 +79,12 @@ function EditProductModal({
     try {
       setLoading(true);
 
-      if (Object.values(productInputs).includes('' || undefined)) {
+      if (Object.values(productInputs).includes("" || undefined)) {
         toast({
-          title: 'Warning!',
-          description: 'Tolong isi semua field',
-          position: 'top',
-          status: 'error',
+          title: "Warning!",
+          description: "Tolong isi semua field",
+          position: "top",
+          status: "error",
           duration: 3000,
           isClosable: true,
         });
@@ -94,10 +94,10 @@ function EditProductModal({
 
       const productImageFileBody = new FormData();
 
-      productImageFileBody.append('productImageFile', productImageFile);
+      productImageFileBody.append("productImageFile", productImageFile);
 
       const config = {
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: {"Content-Type": "multipart/form-data"},
       };
 
       const resAddProduct = await axiosInstance.patch(
@@ -105,22 +105,22 @@ function EditProductModal({
         {
           productInputs,
           currentProduct,
-        },
+        }
       );
 
-      const extName = productInputs.productImage.split('.');
+      const extName = productInputs.productImage.split(".");
 
       await axiosInstance.post(
         `/products/newProductImage/${resAddProduct.data.resUpdateProduct.product_id}.${extName[1]}`,
         productImageFileBody,
-        config,
+        config
       );
 
       toast({
-        title: 'Success!',
-        description: 'Success edit product',
-        position: 'top',
-        status: 'success',
+        title: "Success!",
+        description: "Success edit product",
+        position: "top",
+        status: "success",
         duration: 3000,
         isClosable: true,
       });
@@ -128,14 +128,14 @@ function EditProductModal({
       setLoading(false);
       setEditProductButton(false);
     } catch (error) {
-      console.log({ error });
+      console.log({error});
       toast({
-        title: 'Unexpected Fail!',
+        title: "Unexpected Fail!",
         description: error.response.data?.message
           ? error.response.data.message
           : error.message,
-        position: 'top',
-        status: 'error',
+        position: "top",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
@@ -166,7 +166,7 @@ function EditProductModal({
   }
 
   const handleChange = (prop) => (event) => {
-    setProductInputs({ ...productInputs, [prop]: event.target.value });
+    setProductInputs({...productInputs, [prop]: event.target.value});
   };
 
   return (
@@ -185,9 +185,9 @@ function EditProductModal({
             <label className="hover:cursor-pointer" htmlFor="productImageInput">
               <Image
                 unoptimized
-                style={{ borderRadius: '.3vw' }}
+                style={{borderRadius: ".3vw"}}
                 src={
-                  newProductImage.includes('localhost')
+                  newProductImage.includes("159.223.93.68")
                     ? newProductImage
                     : api_origin + newProductImage
                 }
@@ -210,7 +210,7 @@ function EditProductModal({
           />
           <Input
             value={productInputs.productName}
-            onChange={handleChange('productName')}
+            onChange={handleChange("productName")}
             size="lg"
             marginY=".5vh"
             placeholder="Nama Produk"
@@ -218,16 +218,16 @@ function EditProductModal({
           <div className="flex justify-between my-[.5vh]">
             <Select
               value={productInputs.categoryInfo}
-              onChange={handleChange('categoryInfo')}
+              onChange={handleChange("categoryInfo")}
               size="lg"
-              width={'55%'}
+              width={"55%"}
               placeholder="Kategori"
             >
               {categoriesMap()}
             </Select>
             <Button
               onClick={() => {
-                router.replace('/admin/category');
+                router.replace("/admin/category");
               }}
               size="lg"
             >
@@ -235,37 +235,37 @@ function EditProductModal({
             </Button>
           </div>
           <Input
-            type={'number'}
+            type={"number"}
             value={productInputs.productPrice}
-            onChange={handleChange('productPrice')}
+            onChange={handleChange("productPrice")}
             size="lg"
             marginY=".5vh"
             placeholder="Harga"
           />
           <Input
             value={productInputs.packageType}
-            onChange={handleChange('packageType')}
+            onChange={handleChange("packageType")}
             size="lg"
             marginY=".5vh"
             placeholder="Kemasan"
           />
           <Input
             value={productInputs.servingType}
-            onChange={handleChange('servingType')}
+            onChange={handleChange("servingType")}
             size="lg"
             marginY=".5vh"
             placeholder="Unit Satuan"
           />
           <Input
-            type={'number'}
+            type={"number"}
             value={productInputs.defaultQuantity}
-            onChange={handleChange('defaultQuantity')}
+            onChange={handleChange("defaultQuantity")}
             size="lg"
             marginY=".5vh"
             placeholder="Jumlah Per Kemasan"
           />
           <Textarea
-            onChange={handleChange('description')}
+            onChange={handleChange("description")}
             value={productInputs.description}
             placeholder="Description"
             size="lg"
@@ -277,7 +277,7 @@ function EditProductModal({
         <ModalFooter justifyContent="space-between">
           <div className="flex w-[50%] justify-evenly">
             <Button colorScheme="linkedin" variant="ghost" disabled>
-              {'<'}
+              {"<"}
             </Button>
 
             <Input
@@ -287,12 +287,12 @@ function EditProductModal({
             />
 
             <Button colorScheme="linkedin" variant="ghost" disabled>
-              {'>'}
+              {">"}
             </Button>
           </div>
           <div className="flex w-[50%] justify-end">
             <Button
-              style={{ width: '40%', marginRight: '.3vw' }}
+              style={{width: "40%", marginRight: ".3vw"}}
               isLoading={loading}
               colorScheme="linkedin"
               onClick={() => {
@@ -302,19 +302,19 @@ function EditProductModal({
               Update
             </Button>
             <Button
-              style={{ width: '40%' }}
+              style={{width: "40%"}}
               onClick={() => {
                 setEditProductButton(false);
                 setProductInputs({
-                  categoryInfo: '',
-                  description: '',
-                  packageType: '',
-                  productImage: '',
-                  productName: '',
-                  productPrice: '',
-                  productStock: '',
-                  defaultQuantity: '',
-                  servingType: '',
+                  categoryInfo: "",
+                  description: "",
+                  packageType: "",
+                  productImage: "",
+                  productName: "",
+                  productPrice: "",
+                  productStock: "",
+                  defaultQuantity: "",
+                  servingType: "",
                 });
               }}
               variant="ghost"
