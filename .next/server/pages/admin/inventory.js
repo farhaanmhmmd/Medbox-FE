@@ -80,8 +80,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(2167);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
-const API_URL = "http://159.223.93.68:8000";
-// process.env.NEXT_PUBLIC_API || 'http://159.223.93.68:8000';
+const API_URL = "http://128.199.129.20:8000";
+// process.env.NEXT_PUBLIC_API || 'http://128.199.129.20:8000';
 const axiosInstance = axios__WEBPACK_IMPORTED_MODULE_0___default().create({
     baseURL: API_URL
 });

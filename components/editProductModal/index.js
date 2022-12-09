@@ -187,7 +187,7 @@ function EditProductModal({
                 unoptimized
                 style={{borderRadius: ".3vw"}}
                 src={
-                  newProductImage.includes("159.223.93.68")
+                  newProductImage.includes("128.199.129.20")
                     ? newProductImage
                     : api_origin + newProductImage
                 }

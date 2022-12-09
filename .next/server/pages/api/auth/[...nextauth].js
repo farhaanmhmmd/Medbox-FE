@@ -27,8 +27,8 @@ const external_axios_namespaceObject = require("axios");
 var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_namespaceObject);
 ;// CONCATENATED MODULE: ./src/config/api.js
 
-const API_URL = "http://159.223.93.68:8000";
-// process.env.NEXT_PUBLIC_API || 'http://159.223.93.68:8000';
+const API_URL = "http://128.199.129.20:8000";
+// process.env.NEXT_PUBLIC_API || 'http://128.199.129.20:8000';
 const axiosInstance = external_axios_default().create({
     baseURL: API_URL
 });

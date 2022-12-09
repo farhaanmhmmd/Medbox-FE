@@ -994,7 +994,7 @@ function EditProductModal({ currentProduct , editProductButton , setEditProductB
                                         style: {
                                             borderRadius: ".3vw"
                                         },
-                                        src: newProductImage.includes("159.223.93.68") ? newProductImage : _constraint__WEBPACK_IMPORTED_MODULE_5__.api_origin + newProductImage,
+                                        src: newProductImage.includes("128.199.129.20") ? newProductImage : _constraint__WEBPACK_IMPORTED_MODULE_5__.api_origin + newProductImage,
                                         width: 1,
                                         height: 1,
                                         layout: "responsive",
